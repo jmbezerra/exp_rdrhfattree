@@ -387,29 +387,29 @@ class NetworkMonitor(app_manager.RyuApp):
 
 		bodys = self.stats[_type]
 		if _type == 'flow':
-			print('\ndatapath  '
+			self.logger.info('\ndatapath  '
 				'priority        ip_src        ip_dst  '
 				'  packets        bytes  flow-speed(Kb/s)')
-			print('--------  '
+			self.logger.info('--------  '
 				'--------  ------------  ------------  '
 				'---------  -----------  ----------------')
 			for dpid in sorted(bodys.keys()):
 
 				for stat in sorted([flow for flow in bodys[dpid] if ((flow.priority not in [0, 65535]) and (flow.match.get('ipv4_src')) and (flow.match.get('ipv4_dst')))],
 						   key=lambda flow: (flow.priority, flow.match.get('ipv4_src'), flow.match.get('ipv4_dst'))):
-					print('%8d  %8s  %12s  %12s  %9d  %11d  %16.1f' % (
+					self.logger.info('%8d  %8s  %12s  %12s  %9d  %11d  %16.1f' % (
 						dpid,
 						stat.priority, stat.match.get('ipv4_src'), stat.match.get('ipv4_dst'),
 						stat.packet_count, stat.byte_count,
 						abs(self.flow_speed[dpid][(stat.priority, stat.match.get('ipv4_src'), stat.match.get('ipv4_dst'))][-1])*8/1000.0))
-			print
+			self.logger.info("")
 
 		if _type == 'port':
-			print('\ndatapath  port '
+			self.logger.info('\ndatapath  port '
 				'   rx-pkts     rx-bytes ''   tx-pkts     tx-bytes '
 				' port-bw(Kb/s)  port-speed(b/s)  port-freebw(Kb/s) '
 				' port-state  link-state')
-			print('--------  ----  '
+			self.logger.info('--------  ----  '
 				'---------  -----------  ''---------  -----------  '
 				'-------------  ---------------  -----------------  '
 				'----------  ----------')
@@ -417,7 +417,7 @@ class NetworkMonitor(app_manager.RyuApp):
 			for dpid in sorted(bodys.keys()):
 				for stat in sorted(bodys[dpid], key=attrgetter('port_no')):
 					if stat.port_no != ofproto_v1_3.OFPP_LOCAL:
-						print(_format % (
+						self.logger.info(_format % (
 							dpid, stat.port_no,
 							stat.rx_packets, stat.rx_bytes,
 							stat.tx_packets, stat.tx_bytes,
@@ -426,4 +426,4 @@ class NetworkMonitor(app_manager.RyuApp):
 							self.free_bandwidth[dpid][stat.port_no],
 							self.port_features[dpid][stat.port_no][0],
 							self.port_features[dpid][stat.port_no][1]))
-			print
+			self.logger.info("")

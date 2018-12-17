@@ -100,7 +100,7 @@ def get_throughput(throughput, traffic, app, input_file):
 
 	if app == 'NonBlocking':
 		switch = '1001'
-	elif app in ['EFattree', 'ECMP', 'PureSDN', 'Hedera']:
+	elif app in ['EFattree', 'ECMP', 'PureSDN', 'Hedera', 'TCC']:
 		switch = '3[0-9][0-9][0-9]'
 	else:
 		pass
@@ -339,10 +339,11 @@ def plot_results():
 	full_bisection_bw = 10.0 * (args.k ** 3 / 4)   # (unit: Mbit/s)
 	utmost_throughput = full_bisection_bw * args.duration
 	# _traffics = "stag1_0.5_0.3 stag2_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1"
-	_traffics = "stag1_0.5_0.3 stag2_0.5_0.3 stag3_0.5_0.3 stag4_0.5_0.3 stag5_0.5_0.3 stag6_0.5_0.3 stag7_0.5_0.3 stag8_0.5_0.3 stag9_0.5_0.3 stag10_0.5_0.3 stag11_0.5_0.3 stag12_0.5_0.3 stag13_0.5_0.3 stag14_0.5_0.3 stag15_0.5_0.3 stag16_0.5_0.3 stag17_0.5_0.3 stag18_0.5_0.3 stag19_0.5_0.3 stag20_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag3_0.6_0.2 stag4_0.6_0.2 stag5_0.6_0.2 stag6_0.6_0.2 stag7_0.6_0.2 stag8_0.6_0.2 stag9_0.6_0.2 stag10_0.6_0.2 stag11_0.6_0.2 stag12_0.6_0.2 stag13_0.6_0.2 stag14_0.6_0.2 stag15_0.6_0.2 stag16_0.6_0.2 stag17_0.6_0.2 stag18_0.6_0.2 stag19_0.6_0.2 stag20_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag3_0.7_0.2 stag4_0.7_0.2 stag5_0.7_0.2 stag6_0.7_0.2 stag7_0.7_0.2 stag8_0.7_0.2 stag9_0.7_0.2 stag10_0.7_0.2 stag11_0.7_0.2 stag12_0.7_0.2 stag13_0.7_0.2 stag14_0.7_0.2 stag15_0.7_0.2 stag16_0.7_0.2 stag17_0.7_0.2 stag18_0.7_0.2 stag19_0.7_0.2 stag20_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1 stag3_0.8_0.1 stag4_0.8_0.1 stag5_0.8_0.1 stag6_0.8_0.1 stag7_0.8_0.1 stag8_0.8_0.1 stag9_0.8_0.1 stag10_0.8_0.1 stag11_0.8_0.1 stag12_0.8_0.1 stag13_0.8_0.1 stag14_0.8_0.1 stag15_0.8_0.1 stag16_0.8_0.1 stag17_0.8_0.1 stag18_0.8_0.1 stag19_0.8_0.1 stag20_0.8_0.1"
+#	_traffics = "stag1_0.5_0.3 stag2_0.5_0.3 stag3_0.5_0.3 stag4_0.5_0.3 stag5_0.5_0.3 stag6_0.5_0.3 stag7_0.5_0.3 stag8_0.5_0.3 stag9_0.5_0.3 stag10_0.5_0.3 stag11_0.5_0.3 stag12_0.5_0.3 stag13_0.5_0.3 stag14_0.5_0.3 stag15_0.5_0.3 stag16_0.5_0.3 stag17_0.5_0.3 stag18_0.5_0.3 stag19_0.5_0.3 stag20_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag3_0.6_0.2 stag4_0.6_0.2 stag5_0.6_0.2 stag6_0.6_0.2 stag7_0.6_0.2 stag8_0.6_0.2 stag9_0.6_0.2 stag10_0.6_0.2 stag11_0.6_0.2 stag12_0.6_0.2 stag13_0.6_0.2 stag14_0.6_0.2 stag15_0.6_0.2 stag16_0.6_0.2 stag17_0.6_0.2 stag18_0.6_0.2 stag19_0.6_0.2 stag20_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag3_0.7_0.2 stag4_0.7_0.2 stag5_0.7_0.2 stag6_0.7_0.2 stag7_0.7_0.2 stag8_0.7_0.2 stag9_0.7_0.2 stag10_0.7_0.2 stag11_0.7_0.2 stag12_0.7_0.2 stag13_0.7_0.2 stag14_0.7_0.2 stag15_0.7_0.2 stag16_0.7_0.2 stag17_0.7_0.2 stag18_0.7_0.2 stag19_0.7_0.2 stag20_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1 stag3_0.8_0.1 stag4_0.8_0.1 stag5_0.8_0.1 stag6_0.8_0.1 stag7_0.8_0.1 stag8_0.8_0.1 stag9_0.8_0.1 stag10_0.8_0.1 stag11_0.8_0.1 stag12_0.8_0.1 stag13_0.8_0.1 stag14_0.8_0.1 stag15_0.8_0.1 stag16_0.8_0.1 stag17_0.8_0.1 stag18_0.8_0.1 stag19_0.8_0.1 stag20_0.8_0.1"
+	_traffics="stag1_0.5_0.3 stag2_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1"
 	traffics = _traffics.split(' ')
 	traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1']
-	apps = ['EFattree', 'ECMP', 'PureSDN', 'Hedera']
+	apps = ['EFattree', 'ECMP', 'PureSDN', 'Hedera', 'TCC']
 	throughput = {}
 	first_packet_delay = {}
 	average_delay = {}
@@ -367,12 +368,14 @@ def plot_results():
 	ECMP_value_list = get_average_bisection_bw(throughput, traffics, 'ECMP')
 	Hedera_value_list = get_average_bisection_bw(throughput, traffics, 'Hedera')
 	PureSDN_value_list = get_average_bisection_bw(throughput, traffics, 'PureSDN')
+	TCC_value_list = get_average_bisection_bw(throughput, traffics, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, EFattree_value_list, bar_width, color='r', label='EFattree')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
 	plt.bar(index + 2 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 3 * bar_width, PureSDN_value_list, bar_width, color='g', label='PureSDN')
+	plt.bar(index + 4 * bar_width, TCC_value_list, bar_width, color='k', label='TCC')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel('Average Throughput\n(Mbps)', fontsize='x-large')
 	plt.ylim(0, full_bisection_bw)
@@ -392,12 +395,14 @@ def plot_results():
 	ECMP_value_list = get_value_list_2(throughput, traffics, item, 'ECMP')
 	Hedera_value_list = get_value_list_2(throughput, traffics, item, 'Hedera')
 	PureSDN_value_list = get_value_list_2(throughput, traffics, item, 'PureSDN')
+	TCC_value_list = get_value_list_2(throughput, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, EFattree_value_list, bar_width, color='r', label='EFattree')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
 	plt.bar(index + 2 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 3 * bar_width, PureSDN_value_list, bar_width, color='g', label='PureSDN')
+	plt.bar(index + 4 * bar_width, TCC_value_list, bar_width, color='k', label='TCC')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel('Normalized Total Throughput\n', fontsize='x-large')
 	plt.ylim(0, 1)
@@ -417,12 +422,14 @@ def plot_results():
 	PureSDN_value_list = get_value_list_2(first_packet_delay, traffics, item, 'PureSDN')
 	Hedera_value_list = get_value_list_2(first_packet_delay, traffics, item, 'Hedera')
 	ECMP_value_list = get_value_list_2(first_packet_delay, traffics, item, 'ECMP')
+	TCC_value_list = get_value_list_2(first_packet_delay, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index, EFattree_value_list, bar_width, color='r', label='EFattree')
 	plt.bar(index + 1 * bar_width, PureSDN_value_list, bar_width, color='g', label='PureSDN')
 	plt.bar(index + 2 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 3 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 4 * bar_width, TCC_value_list, bar_width, color='k', label='TCC')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel('Average First-packet Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
 	plt.yticks(fontsize='large')
@@ -441,12 +448,14 @@ def plot_results():
 	PureSDN_value_list = get_value_list_3(first_packet_delay, traffics, items, 'PureSDN')
 	Hedera_value_list = get_value_list_3(first_packet_delay, traffics, items, 'Hedera')
 	ECMP_value_list = get_value_list_3(first_packet_delay, traffics, items, 'ECMP')
+	TCC_value_list = get_value_list_3(first_packet_delay, traffics, items, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index, EFattree_value_list, bar_width, color='r', label='EFattree')
 	plt.bar(index + 1 * bar_width, PureSDN_value_list, bar_width, color='g', label='PureSDN')
 	plt.bar(index + 2 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 3 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 4 * bar_width, TCC_value_list, bar_width, color='k', label='TCC')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel('First-packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
 	plt.yticks(fontsize='large')
@@ -465,12 +474,14 @@ def plot_results():
 	PureSDN_value_list = get_value_list_2(average_delay, traffics, item, 'PureSDN')
 	Hedera_value_list = get_value_list_2(average_delay, traffics, item, 'Hedera')
 	ECMP_value_list = get_value_list_2(average_delay, traffics, item, 'ECMP')
+	TCC_value_list = get_value_list_2(average_delay, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index, EFattree_value_list, bar_width, color='r', label='EFattree')
 	plt.bar(index + 1 * bar_width, PureSDN_value_list, bar_width, color='g', label='PureSDN')
 	plt.bar(index + 2 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 3 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 4 * bar_width, TCC_value_list, bar_width, color='k', label='TCC')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel('Average Packet Round-trip Delay of\nDelay-sensitive Traffic\n(ms)', fontsize='large')
 	plt.yticks(fontsize='large')
@@ -489,12 +500,14 @@ def plot_results():
 	PureSDN_value_list = get_value_list_3(average_delay, traffics, items, 'PureSDN')
 	Hedera_value_list = get_value_list_3(average_delay, traffics, items, 'Hedera')
 	ECMP_value_list = get_value_list_3(average_delay, traffics, items, 'ECMP')
+	TCC_value_list = get_value_list_3(average_delay, traffics, items, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index, EFattree_value_list, bar_width, color='r', label='EFattree')
 	plt.bar(index + 1 * bar_width, PureSDN_value_list, bar_width, color='g', label='PureSDN')
 	plt.bar(index + 2 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 3 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 4 * bar_width, TCC_value_list, bar_width, color='k', label='TCC')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel('Packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
 	plt.yticks(fontsize='large')
@@ -513,12 +526,14 @@ def plot_results():
 	PureSDN_value_list = get_value_list_2(average_delay, traffics, item, 'PureSDN')
 	Hedera_value_list = get_value_list_2(average_delay, traffics, item, 'Hedera')
 	ECMP_value_list = get_value_list_2(average_delay, traffics, item, 'ECMP')
+	TCC_value_list = get_value_list_2(average_delay, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index, EFattree_value_list, bar_width, color='r', label='EFattree')
 	plt.bar(index + 1 * bar_width, PureSDN_value_list, bar_width, color='g', label='PureSDN')
 	plt.bar(index + 2 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 3 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 4 * bar_width, TCC_value_list, bar_width, color='k', label='TCC')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel('Mean Deviation of Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
 	plt.yticks(fontsize='large')
@@ -530,3 +545,4 @@ def plot_results():
 
 if __name__ == '__main__':
 	plot_results()
+

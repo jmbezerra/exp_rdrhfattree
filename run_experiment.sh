@@ -28,8 +28,10 @@ trap ctrlc INT
 # and 50% between different Pods.
 # "random" means choosing the iperf server randomly.
 # Change it if needed.
-traffics="stag1_0.5_0.3 stag2_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1"
+traffics="stag_0.2_0.3"
+#traffics="stag1_0.5_0.3 stag2_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1"
 # traffics="stag_0.2_0.3 stag_0.3_0.3 stag_0.4_0.3 stag_0.5_0.3 stag_0.6_0.2 stag_0.7_0.2 stag_0.8_0.1 random"
+#traffics="stag1_0.5_0.3 stag2_0.5_0.3 stag3_0.5_0.3 stag4_0.5_0.3 stag5_0.5_0.3 stag6_0.5_0.3 stag7_0.5_0.3 stag8_0.5_0.3 stag9_0.5_0.3 stag10_0.5_0.3 stag11_0.5_0.3 stag12_0.5_0.3 stag13_0.5_0.3 stag14_0.5_0.3 stag15_0.5_0.3 stag16_0.5_0.3 stag17_0.5_0.3 stag18_0.5_0.3 stag19_0.5_0.3 stag20_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag3_0.6_0.2 stag4_0.6_0.2 stag5_0.6_0.2 stag6_0.6_0.2 stag7_0.6_0.2 stag8_0.6_0.2 stag9_0.6_0.2 stag10_0.6_0.2 stag11_0.6_0.2 stag12_0.6_0.2 stag13_0.6_0.2 stag14_0.6_0.2 stag15_0.6_0.2 stag16_0.6_0.2 stag17_0.6_0.2 stag18_0.6_0.2 stag19_0.6_0.2 stag20_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag3_0.7_0.2 stag4_0.7_0.2 stag5_0.7_0.2 stag6_0.7_0.2 stag7_0.7_0.2 stag8_0.7_0.2 stag9_0.7_0.2 stag10_0.7_0.2 stag11_0.7_0.2 stag12_0.7_0.2 stag13_0.7_0.2 stag14_0.7_0.2 stag15_0.7_0.2 stag16_0.7_0.2 stag17_0.7_0.2 stag18_0.7_0.2 stag19_0.7_0.2 stag20_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1 stag3_0.8_0.1 stag4_0.8_0.1 stag5_0.8_0.1 stag6_0.8_0.1 stag7_0.8_0.1 stag8_0.8_0.1 stag9_0.8_0.1 stag10_0.8_0.1 stag11_0.8_0.1 stag12_0.8_0.1 stag13_0.8_0.1 stag14_0.8_0.1 stag15_0.8_0.1 stag16_0.8_0.1 stag17_0.8_0.1 stag18_0.8_0.1 stag19_0.8_0.1 stag20_0.8_0.1"
 # Output directory.
 out_dir="./results"
 rm -f -r ./results
@@ -43,31 +45,37 @@ do
 	sleep 1
 
 	# EFattree
-	dir=$out_dir/$traffic/EFattree
-	mkdir -p $dir
-	mn -c
-	sudo python ./EFattree/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
+	#dir=$out_dir/$traffic/EFattree
+	#mkdir -p $dir
+	#mn -c
+	#sudo python ./EFattree/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
 
 	# ECMP
-	dir=$out_dir/$traffic/ECMP
-	mkdir -p $dir
-	mn -c
-	sudo python ./ECMP/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
+	#dir=$out_dir/$traffic/ECMP
+	#mkdir -p $dir
+	#mn -c
+	#sudo python ./ECMP/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
 
 	# PureSDN
-	dir=$out_dir/$traffic/PureSDN
-	mkdir -p $dir
-	mn -c
-	sudo python ./PureSDN/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
+	#dir=$out_dir/$traffic/PureSDN
+	#mkdir -p $dir
+	#mn -c
+	#sudo python ./PureSDN/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
 
 	# Hedera
-	dir=$out_dir/$traffic/Hedera
+	#dir=$out_dir/$traffic/Hedera
+	#mkdir -p $dir
+	#mn -c
+	#sudo python ./Hedera/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
+
+	#TCC
+	dir=$out_dir/$traffic/TCC
 	mkdir -p $dir
 	mn -c
-	sudo python ./Hedera/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
+	sudo python ./TCC/fattree.py --k $k --duration $duration --dir $dir --cpu $cpu
 
 done
 
 
 # Plot results.
-sudo python ./plot_results.py --k $k --duration $duration --dir $out_dir
+#sudo python ./plot_results.py --k $k --duration $duration --dir $out_dir

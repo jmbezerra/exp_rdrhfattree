@@ -472,7 +472,7 @@ class NetworkMonitor(app_manager.RyuApp):
 		"""
 		capabilities = {}
 		best_paths = copy.deepcopy(paths)
-
+		self.logger.info(">>>" + str(paths))
 		for src in paths:
 			for dst in paths[src]:
 				if src == dst:

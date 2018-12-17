@@ -190,6 +190,8 @@ class ShortestForwarding(app_manager.RyuApp):
 		ofproto = datapath.ofproto
 
 		result = self.awareness.get_host_location(dst_ip)
+		self.logger.info("result: ")
+		self.logger.info(result)
 		if result:
 			# Host has been recorded in access table.
 			datapath_dst, out_port = result[0], result[1]
@@ -212,7 +214,6 @@ class ShortestForwarding(app_manager.RyuApp):
 		shortest_paths = self.awareness.shortest_paths
 		# Create bandwidth-sensitive datapath graph.
 		graph = self.awareness.graph
-
 		if weight == self.WEIGHT_MODEL['hop']:
 			return shortest_paths.get(src).get(dst)[0]
 		elif weight == self.WEIGHT_MODEL['bw']:
