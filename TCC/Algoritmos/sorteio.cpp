@@ -73,7 +73,7 @@ int main(){
 	for (int i = 0; i < E; i++){
 		file >> u >> v >> w;
 		commodities.insert(make_pair(make_pair(u, v), w));
-	}
+	}	
 
 	cin >> V >> d;
 	p.resize(V);
@@ -151,4 +151,3 @@ int main(){
 
 	return 0;
 }
-

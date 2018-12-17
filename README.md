@@ -25,12 +25,6 @@ To register parsing parameters, you NEED to add the following code into the end 
         cfg.IntOpt('fanout', default=4, help='switch fanout number.')])
 
 
-### Reinstall Ryu
-
-You must reinstall Ryu, so that you can run the new code. In the top directory of Ryu project:
-
-    sudo python setup.py install
-
 
 ### Start
 

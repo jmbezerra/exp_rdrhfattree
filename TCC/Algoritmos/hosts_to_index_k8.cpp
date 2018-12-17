@@ -4,39 +4,14 @@ using namespace std;
 
 #define EPS 0.0001
 
-map<int, int> convert;
-bool criado = false;
-
 int host_id2switch(string id){
-	int aux = ((id[3] - '0' - 1) * 2) + (id[7] - '0');
-	return 3000 + (aux + 1) / 2;
+	if (id.size() == 8) return 3000 + (id[3] - '0');
+	if (id.size() == 9) return 3000 + 10 * (id[3] - '0') + (id[4] - '0');
+	return 3000 + 100 * (id[3] - '0') + 10 * (id[4] - '0') + (id[5] - '0');
 }
 
 int switch2index(int entry){
-	if (!criado){
-		criado = true;
-		convert[1001] = 16;
-		convert[1002] = 17;
-		convert[1003] = 18;
-		convert[1004] = 19;
-		convert[2001] = 8;
-		convert[2002] = 9;
-		convert[2003] = 10;
-		convert[2004] = 11;
-		convert[2005] = 12;
-		convert[2006] = 13;
-		convert[2007] = 14;
-		convert[2008] = 15;
-		convert[3001] = 0;
-		convert[3002] = 1;
-		convert[3003] = 2;
-		convert[3004] = 3;
-		convert[3005] = 4;
-		convert[3006] = 5;
-		convert[3007] = 6;
-		convert[3008] = 7;
-	}
-	return convert[entry];
+	return entry - 3001;
 }
 
 int main(){
