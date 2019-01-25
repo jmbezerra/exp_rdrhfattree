@@ -16,10 +16,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#import argparse
+#import re
+#import numpy as np
+#import matplotlib.pyplot as plt
+
 import argparse
 import re
-import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import numpy as np
+
+
+
 
 
 parser = argparse.ArgumentParser(description="Plot EFattree experiments' results")
@@ -28,8 +38,11 @@ parser.add_argument('--duration', dest='duration', type=int, default=60, help="D
 parser.add_argument('--dir', dest='out_dir', help="Directory to store outputs")
 args = parser.parse_args()
 
-_traffics = "stag_0.2_0.3"
-traffics_brief = ['stag_0.2_0.3']
+_traffics = "stag1_0.5_0.3 stag1_0.6_0.2 stag1_0.7_0.2 stag1_0.8_0.1 stag1_0.2_0.3 stag1_0.4_0.3 random1"
+traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1', 'stag_0.2_0.3','stag_0.4_0.3','random']
+
+#_traffics = "stag1_0.5_0.3 stag1_0.6_0.2 stag1_0.7_0.2 stag1_0.8_0.1 stag1_0.2_0.3 stag1_0.3_0.3 stag1_0.4_0.3"
+#traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1', 'stag_0.2_0.3', 'stag_0.3_0.3', 'stag_0.4_0.3']
 
 def read_file_1(file_name, delim=','):
 	"""
@@ -354,9 +367,12 @@ def plot_results():
 	full_bisection_bw = 10.0 * (args.k ** 3 / 4)   # (unit: Mbit/s)
 	utmost_throughput = full_bisection_bw * args.duration
 #	_traffics = "stag1_0.5_0.3 stag2_0.5_0.3 stag3_0.5_0.3 stag4_0.5_0.3 stag5_0.5_0.3 stag6_0.5_0.3 stag7_0.5_0.3 stag8_0.5_0.3 stag9_0.5_0.3 stag10_0.5_0.3 stag11_0.5_0.3 stag12_0.5_0.3 stag13_0.5_0.3 stag14_0.5_0.3 stag15_0.5_0.3 stag16_0.5_0.3 stag17_0.5_0.3 stag18_0.5_0.3 stag19_0.5_0.3 stag20_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag3_0.6_0.2 stag4_0.6_0.2 stag5_0.6_0.2 stag6_0.6_0.2 stag7_0.6_0.2 stag8_0.6_0.2 stag9_0.6_0.2 stag10_0.6_0.2 stag11_0.6_0.2 stag12_0.6_0.2 stag13_0.6_0.2 stag14_0.6_0.2 stag15_0.6_0.2 stag16_0.6_0.2 stag17_0.6_0.2 stag18_0.6_0.2 stag19_0.6_0.2 stag20_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag3_0.7_0.2 stag4_0.7_0.2 stag5_0.7_0.2 stag6_0.7_0.2 stag7_0.7_0.2 stag8_0.7_0.2 stag9_0.7_0.2 stag10_0.7_0.2 stag11_0.7_0.2 stag12_0.7_0.2 stag13_0.7_0.2 stag14_0.7_0.2 stag15_0.7_0.2 stag16_0.7_0.2 stag17_0.7_0.2 stag18_0.7_0.2 stag19_0.7_0.2 stag20_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1 stag3_0.8_0.1 stag4_0.8_0.1 stag5_0.8_0.1 stag6_0.8_0.1 stag7_0.8_0.1 stag8_0.8_0.1 stag9_0.8_0.1 stag10_0.8_0.1 stag11_0.8_0.1 stag12_0.8_0.1 stag13_0.8_0.1 stag14_0.8_0.1 stag15_0.8_0.1 stag16_0.8_0.1 stag17_0.8_0.1 stag18_0.8_0.1 stag19_0.8_0.1 stag20_0.8_0.1"
-#	_traffics = "stag1_0.5_0.3 stag1_0.6_0.2 stag1_0.7_0.2 stag1_0.8_0.1"
+#	_traffics = "stag1_0.2_0.3 stag1_0.7_0.2"
+	_traffics = "stag1_0.5_0.3 stag1_0.6_0.2 stag1_0.7_0.2 stag1_0.8_0.1 stag1_0.2_0.3 stag1_0.4_0.3 random1"
+
 	traffics = _traffics.split(' ')
-#	traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1']
+#	traffics_brief = ['stag_0.2_0.3', 'stag_0.7_0.2']	
+	traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1', 'stag_0.2_0.3', ' stag_0.4_0.3','random']
 	apps = ['Hedera', 'ECMP', 'TCC']
 	throughput = {}
 	first_packet_delay = {}
@@ -385,9 +401,9 @@ def plot_results():
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='APR')
-	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Taxa Média de Transferência\n(Mbps)', fontsize='x-large')
+	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
+	plt.xticks(index + num_bar / 3.0 * bar_width, traffics_brief, fontsize='large')
+	plt.ylabel(u'Average Throughput\n(Mbps)', fontsize='x-large')
 	plt.ylim(0, full_bisection_bw)
 	plt.yticks(np.linspace(0, full_bisection_bw, 11), fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
@@ -408,9 +424,9 @@ def plot_results():
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='APR')
+	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Taxa de Transferência Normalizada\n', fontsize='x-large')
+	plt.ylabel(u'Normalized Total Throughput\n', fontsize='x-large')
 	plt.ylim(0, 1)
 	plt.yticks(np.linspace(0, 1, 11), fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
@@ -431,9 +447,9 @@ def plot_results():
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='APR')
+	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Atraso médio para Ida e Volta no Primeiro Pacote\nde Tráfego sensível à atraso\n(ms)', fontsize='large')
+	plt.ylabel(u'Average First-packet Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
 	plt.yticks(fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
 	plt.grid(axis='y')
@@ -453,9 +469,9 @@ def plot_results():
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='APR')
+	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Taxa de perda no Primeiro Pacote\nde Tráfego sensível à atraso\n', fontsize='large')
+	plt.ylabel(u'First-packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
 	plt.yticks(fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
 	plt.grid(axis='y')
@@ -475,9 +491,9 @@ def plot_results():
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='APR')
+	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Atraso Médio de Ida e Volta\nde Tráfego sensível à atraso\n(ms)', fontsize='large')
+	plt.ylabel(u'Average Packet Round-trip Delay of\nDelay-sensitive Traffic\n(ms)', fontsize='large')
 	plt.yticks(fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
 	plt.grid(axis='y')
@@ -497,9 +513,9 @@ def plot_results():
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='APR')
+	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Taxa de perda de pacotes\nde Tráfego sensível à atraso\n', fontsize='large')
+	plt.ylabel(u'Packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
 	plt.yticks(fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
 	plt.grid(axis='y')
@@ -519,9 +535,9 @@ def plot_results():
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='APR')
+	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Desvio Padrão para Atraso de Ida e Volta\nde Tráfego sensível à atraso\n(ms)', fontsize='large')
+	plt.ylabel(u'Mean Deviation of Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
 	plt.yticks(fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
 	plt.grid(axis='y')
