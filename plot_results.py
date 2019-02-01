@@ -422,8 +422,8 @@ def plot_results():
 	TCC_value_list = get_value_list_2(throughput, traffics, item, 'TCC')	
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Normalized Total Throughput\n', fontsize='x-large')
@@ -445,8 +445,8 @@ def plot_results():
 	TCC_value_list = get_value_list_2(first_packet_delay, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Average First-packet Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
@@ -467,8 +467,8 @@ def plot_results():
 	TCC_value_list = get_value_list_3(first_packet_delay, traffics, items, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'First-packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
@@ -489,8 +489,8 @@ def plot_results():
 	TCC_value_list = get_value_list_2(average_delay, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Average Packet Round-trip Delay of\nDelay-sensitive Traffic\n(ms)', fontsize='large')
@@ -511,8 +511,8 @@ def plot_results():
 	TCC_value_list = get_value_list_3(average_delay, traffics, items, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
@@ -533,8 +533,8 @@ def plot_results():
 	TCC_value_list = get_value_list_2(average_delay, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='y', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='b', label='ECMP')
+	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Mean Deviation of Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
