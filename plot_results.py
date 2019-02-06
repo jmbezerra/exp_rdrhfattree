@@ -405,7 +405,7 @@ def plot_results():
 	plt.xticks(index + num_bar / 3.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Average Throughput\n(Mbps)', fontsize='x-large')
 	plt.ylim(0, full_bisection_bw)
-	plt.yticks(np.linspace(0, full_bisection_bw, 2), fontsize='large')
+	plt.yticks(np.linspace(0, full_bisection_bw, 100), fontsize='large')
 	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
 	plt.grid(axis='y')
 	plt.tight_layout()
