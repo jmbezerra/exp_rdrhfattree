@@ -4,7 +4,7 @@
 
 k=$1
 duration=60
-out_dir='./results/k4/100'
+out_dir='./results/k8/1000'
 
 
 # # Plot results.
