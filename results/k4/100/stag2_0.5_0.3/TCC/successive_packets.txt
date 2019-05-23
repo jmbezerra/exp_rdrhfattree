@@ -1,10 +1,10 @@
-PING 10.4.0.1 (10.4.0.1) 56(84) bytes of data.
-PING 10.6.0.1 (10.6.0.1) 56(84) bytes of data.
+PING 10.7.0.2 (10.7.0.2) 56(84) bytes of data.
+PING 10.1.0.2 (10.1.0.2) 56(84) bytes of data.
 
---- 10.6.0.1 ping statistics ---
-600 packets transmitted, 599 received, 0% packet loss, time 60306ms
-rtt min/avg/max/mdev = 0.183/82.533/370.026/94.601 ms, pipe 4
+--- 10.1.0.2 ping statistics ---
+600 packets transmitted, 600 received, 0% packet loss, time 60240ms
+rtt min/avg/max/mdev = 2.740/43.942/135.479/32.872 ms, pipe 2
 
---- 10.4.0.1 ping statistics ---
-600 packets transmitted, 599 received, 0% packet loss, time 60328ms
-rtt min/avg/max/mdev = 0.125/82.010/367.639/93.740 ms, pipe 4
+--- 10.7.0.2 ping statistics ---
+600 packets transmitted, 600 received, 0% packet loss, time 60245ms
+rtt min/avg/max/mdev = 2.642/43.969/135.547/32.839 ms, pipe 2

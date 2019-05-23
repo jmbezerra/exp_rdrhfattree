@@ -1,10 +1,10 @@
-PING 10.2.0.1 (10.2.0.1) 56(84) bytes of data.
 PING 10.2.0.2 (10.2.0.2) 56(84) bytes of data.
-
---- 10.2.0.2 ping statistics ---
-600 packets transmitted, 600 received, 0% packet loss, time 60250ms
-rtt min/avg/max/mdev = 0.026/19.551/40.826/7.641 ms
+PING 10.2.0.1 (10.2.0.1) 56(84) bytes of data.
 
 --- 10.2.0.1 ping statistics ---
-600 packets transmitted, 600 received, 0% packet loss, time 60261ms
-rtt min/avg/max/mdev = 0.028/19.557/41.755/7.644 ms
+600 packets transmitted, 600 received, 0% packet loss, time 60259ms
+rtt min/avg/max/mdev = 0.025/20.205/42.421/7.437 ms
+
+--- 10.2.0.2 ping statistics ---
+600 packets transmitted, 600 received, 0% packet loss, time 60265ms
+rtt min/avg/max/mdev = 0.027/20.077/40.179/7.322 ms
