@@ -27,7 +27,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-
+from scipy import stats
+import pandas as pd
 
 
 
@@ -38,11 +39,11 @@ parser.add_argument('--duration', dest='duration', type=int, default=60, help="D
 parser.add_argument('--dir', dest='out_dir', help="Directory to store outputs")
 args = parser.parse_args()
 
-_traffics = "stag2_0.5_0.3 stag2_0.6_0.2 stag2_0.7_0.2 stag2_0.8_0.1 stag2_0.2_0.3 stag2_0.4_0.3 random2"
-traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1', 'stag_0.2_0.3','stag_0.4_0.3','random']
+#_traffics = "stag1_0.5_0.3 stag1_0.6_0.2 stag1_0.7_0.2 stag1_0.8_0.1 stag2_0.5_0.3 stag2_0.6_0.2 stag2_0.7_0.2 stag2_0.8_0.1 random1"
+#traffics_brief = ['stag1_0.5_0.3', 'stag1_0.6_0.2', 'stag1_0.7_0.2', 'stag1_0.8_0.1', 'stag2_0.5_0.3', 'stag2_0.6_0.2', 'stag2_0.7_0.2', 'stag2_0.8_0.1',  'random1']
 
-#_traffics = "stag1_0.5_0.3 stag1_0.6_0.2 stag1_0.7_0.2 stag1_0.8_0.1 stag1_0.2_0.3 stag1_0.3_0.3 stag1_0.4_0.3"
-#traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1', 'stag_0.2_0.3', 'stag_0.3_0.3', 'stag_0.4_0.3']
+_traffics = "stag1_0.2_0.3 stag2_0.2_0.3 stag1_0.5_0.1 stag2_0.5_0.1 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.8_0.1 stag2_0.8_0.1 random random3"
+traffics_brief = ['stag1_0.2_0.3',  'stag2_0.2_0.3',  'stag1_0.5_0.1',  'stag2_0.5_0.1',  'stag1_0.6_0.2',  'stag2_0.6_0.2',  'stag1_0.8_0.1',  'stag2_0.8_0.1',  'random',  'random3']
 
 def read_file_1(file_name, delim=','):
 	"""
@@ -368,11 +369,13 @@ def plot_results():
 	utmost_throughput = full_bisection_bw * args.duration
 #	_traffics = "stag1_0.5_0.3 stag2_0.5_0.3 stag3_0.5_0.3 stag4_0.5_0.3 stag5_0.5_0.3 stag6_0.5_0.3 stag7_0.5_0.3 stag8_0.5_0.3 stag9_0.5_0.3 stag10_0.5_0.3 stag11_0.5_0.3 stag12_0.5_0.3 stag13_0.5_0.3 stag14_0.5_0.3 stag15_0.5_0.3 stag16_0.5_0.3 stag17_0.5_0.3 stag18_0.5_0.3 stag19_0.5_0.3 stag20_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag3_0.6_0.2 stag4_0.6_0.2 stag5_0.6_0.2 stag6_0.6_0.2 stag7_0.6_0.2 stag8_0.6_0.2 stag9_0.6_0.2 stag10_0.6_0.2 stag11_0.6_0.2 stag12_0.6_0.2 stag13_0.6_0.2 stag14_0.6_0.2 stag15_0.6_0.2 stag16_0.6_0.2 stag17_0.6_0.2 stag18_0.6_0.2 stag19_0.6_0.2 stag20_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag3_0.7_0.2 stag4_0.7_0.2 stag5_0.7_0.2 stag6_0.7_0.2 stag7_0.7_0.2 stag8_0.7_0.2 stag9_0.7_0.2 stag10_0.7_0.2 stag11_0.7_0.2 stag12_0.7_0.2 stag13_0.7_0.2 stag14_0.7_0.2 stag15_0.7_0.2 stag16_0.7_0.2 stag17_0.7_0.2 stag18_0.7_0.2 stag19_0.7_0.2 stag20_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1 stag3_0.8_0.1 stag4_0.8_0.1 stag5_0.8_0.1 stag6_0.8_0.1 stag7_0.8_0.1 stag8_0.8_0.1 stag9_0.8_0.1 stag10_0.8_0.1 stag11_0.8_0.1 stag12_0.8_0.1 stag13_0.8_0.1 stag14_0.8_0.1 stag15_0.8_0.1 stag16_0.8_0.1 stag17_0.8_0.1 stag18_0.8_0.1 stag19_0.8_0.1 stag20_0.8_0.1"
 #	_traffics = "stag1_0.2_0.3 stag1_0.7_0.2"
-	_traffics = "stag2_0.5_0.3 stag2_0.6_0.2 stag2_0.7_0.2 stag2_0.8_0.1 stag2_0.2_0.3 stag2_0.4_0.3 random2"
+	_traffics = "stag1_0.2_0.3 stag2_0.2_0.3 stag1_0.5_0.1 stag2_0.5_0.1 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.8_0.1 stag2_0.8_0.1 random random3"
+    #_traffics = "stag1_0.2_0.3 stag2_0.2_0.3 stag1_0.5_0.1 stag2_0.5_0.1 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.8_0.1 stag2_0.8_0.1 random random3"
+#traffics_brief = ['stag1_0.2_0.3',  'stag2_0.2_0.3',  'stag1_0.5_0.1',  'stag2_0.5_0.1',  'stag1_0.6_0.2',  'stag2_0.6_0.2',  'stag1_0.8_0.1',  'stag2_0.8_0.1',  'random',  'random3']
 
 	traffics = _traffics.split(' ')
 #	traffics_brief = ['stag_0.2_0.3', 'stag_0.7_0.2']	
-	traffics_brief = ['stag_0.5_0.3', 'stag_0.6_0.2', 'stag_0.7_0.2', 'stag_0.8_0.1', 'stag_0.2_0.3', ' stag_0.4_0.3','random']
+	traffics_brief = ['stag1_0.2_0.3',  'stag2_0.2_0.3',  'stag1_0.5_0.1',  'stag2_0.5_0.1',  'stag1_0.6_0.2',  'stag2_0.6_0.2',  'stag1_0.8_0.1',  'stag2_0.8_0.1',  'random',  'random3']
 	apps = ['Hedera', 'ECMP', 'TCC']
 	throughput = {}
 	first_packet_delay = {}
@@ -400,7 +403,7 @@ def plot_results():
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 3.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Average Throughput\n(Mbps)', fontsize='x-large')
@@ -411,7 +414,20 @@ def plot_results():
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/1.average_throughput.png')
 
-	# 2. Plot normalized total throughput.
+#KS
+	#cria um dataframe do pandas
+	df = pd.DataFrame()
+
+	#atribui os valores das medicoes as colunas do dataframe
+	df['Hedera'] = np.array(Hedera_value_list)
+	df['ECMP'] = np.array(ECMP_value_list)
+	df['TCC'] = np.array(TCC_value_list)
+
+	#salva o dataframe em um arquivo csv
+	df.to_csv("./results/k4/100/avg_throughput.csv")
+
+
+# 2. Plot normalized total throughput.
 	item = 'normalized_total_throughput'
 	fig = plt.figure()
 	fig.set_size_inches(10, 5)
@@ -423,7 +439,7 @@ def plot_results():
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Normalized Total Throughput\n', fontsize='x-large')
@@ -433,52 +449,20 @@ def plot_results():
 	plt.grid(axis='y')
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/2.normalized_total_throughput.png')
+    #KS
+	#cria um dataframe do pandas
+	df = pd.DataFrame()
 
-	# 3. Plot average first-packet round-trip delay of delay-sensitive traffic.
-	item = 'average_first_packet_round_trip_delay'
-	fig = plt.figure()
-	fig.set_size_inches(10, 5)
-	num_groups = len(traffics_brief)
-	num_bar = len(apps)
-	Hedera_value_list = get_value_list_2(first_packet_delay, traffics, item, 'Hedera')
-	ECMP_value_list = get_value_list_2(first_packet_delay, traffics, item, 'ECMP')
-	TCC_value_list = get_value_list_2(first_packet_delay, traffics, item, 'TCC')
-	index = np.arange(num_groups) + 0.15
-	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
-	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Average First-packet Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
-	plt.yticks(fontsize='large')
-	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
-	plt.grid(axis='y')
-	plt.tight_layout()
-	plt.savefig(args.out_dir + '/3.average_first_packet_round_trip_delay.png')
+	#atribui os valores das medicoes as colunas do dataframe
+	df['Hedera'] = np.array(Hedera_value_list)
+	df['ECMP'] = np.array(ECMP_value_list)
+	df['TCC'] = np.array(TCC_value_list)
 
-	# 4. Plot first-packet loss rate of delay-sensitive traffic.
-	items = ['first_packet_total_send', 'first_packet_total_receive']
-	fig = plt.figure()
-	fig.set_size_inches(10, 5)
-	num_groups = len(traffics_brief)
-	num_bar = len(apps)
-	Hedera_value_list = get_value_list_3(first_packet_delay, traffics, items, 'Hedera')
-	ECMP_value_list = get_value_list_3(first_packet_delay, traffics, items, 'ECMP')
-	TCC_value_list = get_value_list_3(first_packet_delay, traffics, items, 'TCC')
-	index = np.arange(num_groups) + 0.15
-	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
-	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'First-packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
-	plt.yticks(fontsize='large')
-	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
-	plt.grid(axis='y')
-	plt.tight_layout()
-	plt.savefig(args.out_dir + '/4.first_packet_loss_rate.png')
+	#salva o dataframe em um arquivo csv
+	df.to_csv("./results/k4/100/avg_throughput_norm.csv")
 
-	# 5. Plot average packet round-trip delay of delay-sensitive traffic.
+
+    # 5. Plot average packet round-trip delay of delay-sensitive traffic.
 	item = 'average_round_trip_delay'
 	fig = plt.figure()
 	fig.set_size_inches(10, 5)
@@ -490,7 +474,7 @@ def plot_results():
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Average Packet Round-trip Delay of\nDelay-sensitive Traffic\n(ms)', fontsize='large')
@@ -499,6 +483,22 @@ def plot_results():
 	plt.grid(axis='y')
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/5.average_round_trip_delay.png')
+
+
+#KS
+	#cria um dataframe do pandas
+	df = pd.DataFrame()
+
+	#atribui os valores das medicoes as colunas do dataframe
+	df['Hedera'] = np.array(Hedera_value_list)
+	df['ECMP'] = np.array(ECMP_value_list)
+	df['TCC'] = np.array(TCC_value_list)
+
+	#salva o dataframe em um arquivo csv
+	df.to_csv("./results/k4/100/average_round.csv")
+
+
+
 
 	# 6. Plot packet loss rate of delay-sensitive traffic.
 	items = ['total_send', 'total_receive']
@@ -512,7 +512,7 @@ def plot_results():
 	index = np.arange(num_groups) + 0.15
 	bar_width = 0.15
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
+	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
 	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
 	plt.ylabel(u'Packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
@@ -522,27 +522,21 @@ def plot_results():
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/6.packet_loss_rate.png')
 
-	# 7. Plot mean deviation of round-trip delay of delay-sensitive traffic.
-	item = 'mean_deviation_of_round_trip_delay'
-	fig = plt.figure()
-	fig.set_size_inches(10, 5)
-	num_groups = len(traffics_brief)
-	num_bar = len(apps)
-	Hedera_value_list = get_value_list_2(average_delay, traffics, item, 'Hedera')
-	ECMP_value_list = get_value_list_2(average_delay, traffics, item, 'ECMP')
-	TCC_value_list = get_value_list_2(average_delay, traffics, item, 'TCC')
-	index = np.arange(num_groups) + 0.15
-	bar_width = 0.15
-	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
-	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='w', label='ECMP')
-	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
-	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
-	plt.ylabel(u'Mean Deviation of Round-trip Delay\nof Delay-sensitive Traffic\n(ms)', fontsize='large')
-	plt.yticks(fontsize='large')
-	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
-	plt.grid(axis='y')
-	plt.tight_layout()
-	plt.savefig(args.out_dir + '/7.mean_deviation_of_round_trip_delay.png')
+#KS
+	#cria um dataframe do pandas
+	df = pd.DataFrame()
+
+	#atribui os valores das medicoes as colunas do dataframe
+	df['Hedera'] = np.array(Hedera_value_list)
+	df['ECMP'] = np.array(ECMP_value_list)
+	df['TCC'] = np.array(TCC_value_list)
+
+	#salva o dataframe em um arquivo csv
+	df.to_csv("./results/k4/100/packet_loss.csv")
+
+
+
+
 
 if __name__ == '__main__':
 	plot_results()
