@@ -1,0 +1,100 @@
+PING 10.16.0.2 (10.16.0.2) 56(84) bytes of data.
+
+--- 10.16.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 129.568/129.568/129.568/0.000 ms
+PING 10.32.0.4 (10.32.0.4) 56(84) bytes of data.
+
+--- 10.32.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 127.962/127.962/127.962/0.000 ms
+PING 10.7.0.3 (10.7.0.3) 56(84) bytes of data.
+
+--- 10.7.0.3 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 201.540/201.540/201.540/0.000 ms
+PING 10.32.0.4 (10.32.0.4) 56(84) bytes of data.
+
+--- 10.32.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 131.597/131.597/131.597/0.000 ms
+PING 10.12.0.4 (10.12.0.4) 56(84) bytes of data.
+
+--- 10.12.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 214.157/214.157/214.157/0.000 ms
+PING 10.27.0.4 (10.27.0.4) 56(84) bytes of data.
+
+--- 10.27.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 91.611/91.611/91.611/0.000 ms
+PING 10.16.0.2 (10.16.0.2) 56(84) bytes of data.
+
+--- 10.16.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 397.456/397.456/397.456/0.000 ms
+PING 10.27.0.4 (10.27.0.4) 56(84) bytes of data.
+
+--- 10.27.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 372.915/372.915/372.915/0.000 ms
+PING 10.32.0.4 (10.32.0.4) 56(84) bytes of data.
+
+--- 10.32.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 299.049/299.049/299.049/0.000 ms
+PING 10.27.0.4 (10.27.0.4) 56(84) bytes of data.
+
+--- 10.27.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 274.533/274.533/274.533/0.000 ms
+PING 10.12.0.4 (10.12.0.4) 56(84) bytes of data.
+
+--- 10.12.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 211.071/211.071/211.071/0.000 ms
+PING 10.7.0.3 (10.7.0.3) 56(84) bytes of data.
+
+--- 10.7.0.3 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 612.027/612.027/612.027/0.000 ms
+PING 10.27.0.4 (10.27.0.4) 56(84) bytes of data.
+
+--- 10.27.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 651.635/651.635/651.635/0.000 ms
+PING 10.12.0.4 (10.12.0.4) 56(84) bytes of data.
+
+--- 10.12.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 401.766/401.766/401.766/0.000 ms
+PING 10.12.0.4 (10.12.0.4) 56(84) bytes of data.
+
+--- 10.12.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 236.275/236.275/236.275/0.000 ms
+PING 10.7.0.3 (10.7.0.3) 56(84) bytes of data.
+
+--- 10.7.0.3 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 453.852/453.852/453.852/0.000 ms
+PING 10.16.0.2 (10.16.0.2) 56(84) bytes of data.
+
+--- 10.16.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 50.406/50.406/50.406/0.000 ms
+PING 10.7.0.3 (10.7.0.3) 56(84) bytes of data.
+
+--- 10.7.0.3 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 458.530/458.530/458.530/0.000 ms
+PING 10.32.0.4 (10.32.0.4) 56(84) bytes of data.
+
+--- 10.32.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 551.181/551.181/551.181/0.000 ms
+PING 10.16.0.2 (10.16.0.2) 56(84) bytes of data.
+
+--- 10.16.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 930.456/930.456/930.456/0.000 ms

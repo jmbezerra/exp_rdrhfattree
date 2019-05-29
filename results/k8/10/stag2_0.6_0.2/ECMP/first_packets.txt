@@ -1,0 +1,10 @@
+PING 10.31.0.4 (10.31.0.4) 56(84) bytes of data.
+
+--- 10.31.0.4 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 482.564/482.564/482.564/0.000 ms
+PING 10.10.0.2 (10.10.0.2) 56(84) bytes of data.
+
+--- 10.10.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 498.790/498.790/498.790/0.000 ms

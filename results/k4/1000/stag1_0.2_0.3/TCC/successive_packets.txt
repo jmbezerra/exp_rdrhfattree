@@ -1,0 +1,10 @@
+PING 10.3.0.1 (10.3.0.1) 56(84) bytes of data.
+PING 10.8.0.2 (10.8.0.2) 56(84) bytes of data.
+
+--- 10.8.0.2 ping statistics ---
+600 packets transmitted, 600 received, 0% packet loss, time 60266ms
+rtt min/avg/max/mdev = 0.419/2.563/48.712/2.175 ms
+
+--- 10.3.0.1 ping statistics ---
+600 packets transmitted, 600 received, 0% packet loss, time 60276ms
+rtt min/avg/max/mdev = 0.341/2.500/44.424/2.011 ms
