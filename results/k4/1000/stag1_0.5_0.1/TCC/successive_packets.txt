@@ -8,3 +8,13 @@ rtt min/avg/max/mdev = 8.830/58.716/102.953/21.498 ms
 --- 10.4.0.2 ping statistics ---
 600 packets transmitted, 598 received, 0% packet loss, time 60238ms
 rtt min/avg/max/mdev = 7.697/58.505/107.639/21.389 ms
+PING 10.8.0.2 (10.8.0.2) 56(84) bytes of data.
+PING 10.7.0.1 (10.7.0.1) 56(84) bytes of data.
+
+--- 10.8.0.2 ping statistics ---
+600 packets transmitted, 600 received, 0% packet loss, time 60309ms
+rtt min/avg/max/mdev = 0.830/4.902/41.906/3.788 ms
+
+--- 10.7.0.1 ping statistics ---
+600 packets transmitted, 600 received, 0% packet loss, time 60316ms
+rtt min/avg/max/mdev = 1.534/4.904/38.982/3.685 ms
