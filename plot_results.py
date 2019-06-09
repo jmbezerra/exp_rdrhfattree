@@ -42,8 +42,12 @@ args = parser.parse_args()
 #_traffics = "stag1_0.5_0.3 stag1_0.6_0.2 stag1_0.7_0.2 stag1_0.8_0.1 stag2_0.5_0.3 stag2_0.6_0.2 stag2_0.7_0.2 stag2_0.8_0.1 random1"
 #traffics_brief = ['stag1_0.5_0.3', 'stag1_0.6_0.2', 'stag1_0.7_0.2', 'stag1_0.8_0.1', 'stag2_0.5_0.3', 'stag2_0.6_0.2', 'stag2_0.7_0.2', 'stag2_0.8_0.1',  'random1']
 
-_traffics = "stag1_0.2_0.3 stag2_0.2_0.3 stag1_0.5_0.1 stag2_0.5_0.1 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.8_0.1 stag2_0.8_0.1 random random3"
-traffics_brief = ['stag1_0.2_0.3',  'stag2_0.2_0.3',  'stag1_0.5_0.1',  'stag2_0.5_0.1',  'stag1_0.6_0.2',  'stag2_0.6_0.2',  'stag1_0.8_0.1',  'stag2_0.8_0.1',  'random',  'random3']
+#_traffics = "stag1_0.2_0.3 stag2_0.2_0.3 stag1_0.5_0.1 stag2_0.5_0.1 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.8_0.1 stag2_0.8_0.1 random random3"
+#traffics_brief = ['stag1_0.2_0.3',  'stag2_0.2_0.3',  'stag1_0.5_0.1',  'stag2_0.5_0.1',  'stag1_0.6_0.2',  'stag2_0.6_0.2',  'stag1_0.8_0.1',  'stag2_0.8_0.1',  'random',  'random3']
+
+_traffics = "stag1_0.2_0.3 stag1_0.5_0.1 stag1_0.4_0.3 stag2_0.4_0.3 random1 random2 random3 random4"
+traffics_brief = ['stag1_0.2_0.3',  'stag1_0.5_0.1',   'stag1_0.4_0.3',  'stag2_0.4_0.3',  'random1',  'random2', 'random3', 'random4']
+
 
 def read_file_1(file_name, delim=','):
 	"""
@@ -176,7 +180,17 @@ def get_throughput(throughput, traffic, app, input_file):
 
 	throughput[traffic]['normalized_total_throughput'][app] = throughput[traffic]['accumulated_throughput'][app][args.duration] / (full_bisection_bw * args.duration)   # percentage
 
+
+	# arquivo1 = open("throughput_values.csv", mode='w')
+	# arquivo1.write(str(throughput[traffic]['normalized_total_throughput'][app]))
+	# arquivo1.close()
+
+	#pd.DataFrame(throughput['random2']['normalized_total_throughput']['TCC']).to_csv("throughput_values.csv",sep=',')
+	#pd.DataFrame(throughput['stag2_0.4_0.3']['accumulated_throughput']).to_csv("./results/k8/100/throughput_values.csv",sep=',')
+	#pd.DataFrame(throughput).to_csv("./results/k8/100/throughput_values.csv",sep=',')
+	pd.DataFrame(throughput['accumulated_throughput']).to_csv("./results/k8/100/throughput_values.csv",sep=',')
 	return throughput
+
 
 def get_value_list_1(value_dict, traffic, item, app):
 	"""
@@ -190,17 +204,23 @@ def get_value_list_1(value_dict, traffic, item, app):
 def get_average_bisection_bw(value_dict, traffics, app):
 	value_list = []
 	complete_list = []
+	normalized_list = []
 	accumulated_throughput = []
 	for traffic in traffics:
 		complete_list.append(value_dict[traffic]['accumulated_throughput'][app][args.duration] / float(args.duration))
+		normalized_list.append(value_dict[traffic]['normalized_total_throughput'][app])
 		accumulated_throughput.append(value_dict[traffic]['accumulated_throughput'][app][args.duration])
 	# print "accumulated_throughput:", accumulated_throughput
 
 	repeat = len(traffics) / len(traffics_brief)
-
+	
+	
+	
 	for i in xrange(len(traffics_brief)):
 		value_list.append(calculate_average(complete_list[(i * repeat): (i * repeat + repeat)]))
 	return value_list
+
+	
 
 def get_value_list_2(value_dict, traffics, item, app):
 	"""
@@ -369,13 +389,13 @@ def plot_results():
 	utmost_throughput = full_bisection_bw * args.duration
 #	_traffics = "stag1_0.5_0.3 stag2_0.5_0.3 stag3_0.5_0.3 stag4_0.5_0.3 stag5_0.5_0.3 stag6_0.5_0.3 stag7_0.5_0.3 stag8_0.5_0.3 stag9_0.5_0.3 stag10_0.5_0.3 stag11_0.5_0.3 stag12_0.5_0.3 stag13_0.5_0.3 stag14_0.5_0.3 stag15_0.5_0.3 stag16_0.5_0.3 stag17_0.5_0.3 stag18_0.5_0.3 stag19_0.5_0.3 stag20_0.5_0.3 stag1_0.6_0.2 stag2_0.6_0.2 stag3_0.6_0.2 stag4_0.6_0.2 stag5_0.6_0.2 stag6_0.6_0.2 stag7_0.6_0.2 stag8_0.6_0.2 stag9_0.6_0.2 stag10_0.6_0.2 stag11_0.6_0.2 stag12_0.6_0.2 stag13_0.6_0.2 stag14_0.6_0.2 stag15_0.6_0.2 stag16_0.6_0.2 stag17_0.6_0.2 stag18_0.6_0.2 stag19_0.6_0.2 stag20_0.6_0.2 stag1_0.7_0.2 stag2_0.7_0.2 stag3_0.7_0.2 stag4_0.7_0.2 stag5_0.7_0.2 stag6_0.7_0.2 stag7_0.7_0.2 stag8_0.7_0.2 stag9_0.7_0.2 stag10_0.7_0.2 stag11_0.7_0.2 stag12_0.7_0.2 stag13_0.7_0.2 stag14_0.7_0.2 stag15_0.7_0.2 stag16_0.7_0.2 stag17_0.7_0.2 stag18_0.7_0.2 stag19_0.7_0.2 stag20_0.7_0.2 stag1_0.8_0.1 stag2_0.8_0.1 stag3_0.8_0.1 stag4_0.8_0.1 stag5_0.8_0.1 stag6_0.8_0.1 stag7_0.8_0.1 stag8_0.8_0.1 stag9_0.8_0.1 stag10_0.8_0.1 stag11_0.8_0.1 stag12_0.8_0.1 stag13_0.8_0.1 stag14_0.8_0.1 stag15_0.8_0.1 stag16_0.8_0.1 stag17_0.8_0.1 stag18_0.8_0.1 stag19_0.8_0.1 stag20_0.8_0.1"
 #	_traffics = "stag1_0.2_0.3 stag1_0.7_0.2"
-	_traffics = "stag1_0.2_0.3 stag2_0.2_0.3 stag1_0.5_0.1 stag2_0.5_0.1 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.8_0.1 stag2_0.8_0.1 random random3"
+	_traffics = "stag1_0.2_0.3 stag1_0.5_0.1 stag1_0.4_0.3 stag2_0.4_0.3 random1 random2 random3 random4"
     #_traffics = "stag1_0.2_0.3 stag2_0.2_0.3 stag1_0.5_0.1 stag2_0.5_0.1 stag1_0.6_0.2 stag2_0.6_0.2 stag1_0.8_0.1 stag2_0.8_0.1 random random3"
 #traffics_brief = ['stag1_0.2_0.3',  'stag2_0.2_0.3',  'stag1_0.5_0.1',  'stag2_0.5_0.1',  'stag1_0.6_0.2',  'stag2_0.6_0.2',  'stag1_0.8_0.1',  'stag2_0.8_0.1',  'random',  'random3']
 
 	traffics = _traffics.split(' ')
 #	traffics_brief = ['stag_0.2_0.3', 'stag_0.7_0.2']	
-	traffics_brief = ['stag1_0.2_0.3',  'stag2_0.2_0.3',  'stag1_0.5_0.1',  'stag2_0.5_0.1',  'stag1_0.6_0.2',  'stag2_0.6_0.2',  'stag1_0.8_0.1',  'stag2_0.8_0.1',  'random',  'random3']
+	traffics_brief = ['stag1_0.2_0.3',  'stag1_0.5_0.1',   'stag1_0.4_0.3',  'stag2_0.4_0.3',  'random1',  'random2', 'random3', 'random4']
 	apps = ['Hedera', 'ECMP', 'TCC']
 	throughput = {}
 	first_packet_delay = {}
@@ -401,15 +421,15 @@ def plot_results():
 	ECMP_value_list = get_average_bisection_bw(throughput, traffics, 'ECMP')
 	TCC_value_list = get_average_bisection_bw(throughput, traffics, 'TCC')
 	index = np.arange(num_groups) + 0.15
-	bar_width = 0.15
+	bar_width = 0.20
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
-	plt.xticks(index + num_bar / 3.0 * bar_width, traffics_brief, fontsize='large')
+	plt.xticks(index + num_bar / 3.0 * bar_width, traffics_brief, fontsize= 10)
 	plt.ylabel(u'Average Throughput\n(Mbps)', fontsize='x-large')
 	plt.ylim(0, full_bisection_bw)
 	plt.yticks(np.linspace(0, full_bisection_bw, 8), fontsize='large')
-	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
+	plt.legend(loc='upper right', ncol=len(apps), fontsize='large')
 	plt.grid(axis='y')
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/1.average_throughput.png')
@@ -423,8 +443,9 @@ def plot_results():
 	df['ECMP'] = np.array(ECMP_value_list)
 	df['TCC'] = np.array(TCC_value_list)
 
+
 	#salva o dataframe em um arquivo csv
-	df.to_csv("./results/k4/100/avg_throughput.csv")
+	df.to_csv("./results/k8/100/avg_throughput.csv")
 
 
 # 2. Plot normalized total throughput.
@@ -437,15 +458,15 @@ def plot_results():
 	ECMP_value_list = get_value_list_2(throughput, traffics, item, 'ECMP')
 	TCC_value_list = get_value_list_2(throughput, traffics, item, 'TCC')	
 	index = np.arange(num_groups) + 0.15
-	bar_width = 0.15
+	bar_width = 0.20
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
-	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
+	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize= 10)
 	plt.ylabel(u'Normalized Total Throughput\n', fontsize='x-large')
 	plt.ylim(0, 1)
 	plt.yticks(np.linspace(0, 1, 11), fontsize='large')
-	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
+	plt.legend(loc='upper right', ncol=len(apps), fontsize='large')
 	plt.grid(axis='y')
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/2.normalized_total_throughput.png')
@@ -459,7 +480,7 @@ def plot_results():
 	df['TCC'] = np.array(TCC_value_list)
 
 	#salva o dataframe em um arquivo csv
-	df.to_csv("./results/k4/100/avg_throughput_norm.csv")
+	df.to_csv("./results/k8/100/avg_throughput_norm.csv")
 
 
     # 5. Plot average packet round-trip delay of delay-sensitive traffic.
@@ -472,14 +493,14 @@ def plot_results():
 	ECMP_value_list = get_value_list_2(average_delay, traffics, item, 'ECMP')
 	TCC_value_list = get_value_list_2(average_delay, traffics, item, 'TCC')
 	index = np.arange(num_groups) + 0.15
-	bar_width = 0.15
+	bar_width = 0.20
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
-	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
+	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize=11)
 	plt.ylabel(u'Average Packet Round-trip Delay of\nDelay-sensitive Traffic\n(ms)', fontsize='large')
 	plt.yticks(fontsize='large')
-	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
+	plt.legend(loc='upper right', ncol=len(apps), fontsize='large')
 	plt.grid(axis='y')
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/5.average_round_trip_delay.png')
@@ -495,7 +516,7 @@ def plot_results():
 	df['TCC'] = np.array(TCC_value_list)
 
 	#salva o dataframe em um arquivo csv
-	df.to_csv("./results/k4/100/average_round.csv")
+	df.to_csv("./results/k8/100/average_round.csv")
 
 
 
@@ -510,14 +531,14 @@ def plot_results():
 	ECMP_value_list = get_value_list_3(average_delay, traffics, items, 'ECMP')
 	TCC_value_list = get_value_list_3(average_delay, traffics, items, 'TCC')
 	index = np.arange(num_groups) + 0.15
-	bar_width = 0.15
+	bar_width = 0.20
 	plt.bar(index + 0 * bar_width, Hedera_value_list, bar_width, color='0.8', label='Hedera')
 	plt.bar(index + 1 * bar_width, ECMP_value_list, bar_width, color='grey', label='ECMP')
 	plt.bar(index + 2 * bar_width, TCC_value_list, bar_width, color='k', label='RDRH')
-	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize='large')
+	plt.xticks(index + num_bar / 2.0 * bar_width, traffics_brief, fontsize= 10)
 	plt.ylabel(u'Packet Loss Rate of\nDelay-sensitive Traffic\n', fontsize='large')
 	plt.yticks(fontsize='large')
-	plt.legend(loc='upper right', ncol=len(apps), fontsize='small')
+	plt.legend(loc='upper right', ncol=len(apps), fontsize='large')
 	plt.grid(axis='y')
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/6.packet_loss_rate.png')
@@ -532,7 +553,7 @@ def plot_results():
 	df['TCC'] = np.array(TCC_value_list)
 
 	#salva o dataframe em um arquivo csv
-	df.to_csv("./results/k4/100/packet_loss.csv")
+	df.to_csv("./results/k8/100/packet_loss.csv")
 
 
 
