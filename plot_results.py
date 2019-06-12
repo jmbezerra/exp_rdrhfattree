@@ -186,9 +186,16 @@ def get_throughput(throughput, traffic, app, input_file):
 	# arquivo1.close()
 
 	#pd.DataFrame(throughput['random2']['normalized_total_throughput']['TCC']).to_csv("throughput_values.csv",sep=',')
-	#pd.DataFrame(throughput['stag2_0.4_0.3']['accumulated_throughput']).to_csv("./results/k8/100/throughput_values.csv",sep=',')
+	#pd.DataFrame(throughput['stag2_0.4_0.3']).to_csv("./results/k8/100/throughput_stag.csv",sep=',')
 	#pd.DataFrame(throughput).to_csv("./results/k8/100/throughput_values.csv",sep=',')
-	pd.DataFrame(throughput['accumulated_throughput']).to_csv("./results/k8/100/throughput_values.csv",sep=',')
+	#pd.DataFrame(throughput).to_csv("./results/k8/100/throughput_values.csv",sep=',')
+	#print throughput["stag1_0.2_0.3"]
+	#for key in throughput.keys():
+    #		print "key: %s % (key)
+	print throughput.keys()
+	#if "random1" in throughput.keys():
+	#	print throughput["random1"]["accumulated_throughput"]
+	#print "############################"
 	return throughput
 
 
@@ -400,7 +407,6 @@ def plot_results():
 	throughput = {}
 	first_packet_delay = {}
 	average_delay = {}
-
 	for traffic in traffics:
 		for app in apps:
 			bwmng_file = args.out_dir + '/%s/%s/bwmng.txt' % (traffic, app)
@@ -411,6 +417,12 @@ def plot_results():
 			first_packet_delay = get_delay(first_packet_delay, traffic, keys1, app, first_packet_file)
 			successive_packets_file = args.out_dir + '/%s/%s/successive_packets.txt' % (traffic, app)
 			average_delay = get_delay(average_delay, traffic, keys2, app, successive_packets_file)
+    
+	print "$$$$$$$$$$$$$$$$$$"
+	print throughput.keys()
+	pd.DataFrame(throughput['random1']['accumulated_throughput']).to_csv("throughput_random1.csv",sep=',')
+	print "$$$$$$$$$$$$$$$$$$"
+
 
 	# 1. Plot average throughput.
 	fig = plt.figure()
