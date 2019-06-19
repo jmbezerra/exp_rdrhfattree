@@ -208,6 +208,7 @@ def get_value_list_1(value_dict, traffic, item, app):
 		value_list.append(value_dict[traffic][item][app][i])
 	return value_list
 
+
 def get_average_bisection_bw(value_dict, traffics, app):
 	value_list = []
 	complete_list = []
@@ -418,10 +419,10 @@ def plot_results():
 			successive_packets_file = args.out_dir + '/%s/%s/successive_packets.txt' % (traffic, app)
 			average_delay = get_delay(average_delay, traffic, keys2, app, successive_packets_file)
     
-	print "$$$$$$$$$$$$$$$$$$"
-	print throughput.keys()
-	pd.DataFrame(throughput['random1']['accumulated_throughput']).to_csv("throughput_random1.csv",sep=',')
-	print "$$$$$$$$$$$$$$$$$$"
+	#print "$$$$$$$$$$$$$$$$$$"
+	#print throughput.keys()
+	#pd.DataFrame(throughput['random1']['']).to_csv("throughput_normalized_random1.csv",sep=',')
+	#print "$$$$$$$$$$$$$$$$$$"
 
 
 	# 1. Plot average throughput.
@@ -447,6 +448,8 @@ def plot_results():
 	plt.savefig(args.out_dir + '/1.average_throughput.png')
 
 #KS
+	#print Hedera_value_list
+
 	#cria um dataframe do pandas
 	df = pd.DataFrame()
 
@@ -482,6 +485,69 @@ def plot_results():
 	plt.grid(axis='y')
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/2.normalized_total_throughput.png')
+    
+
+
+	#Valores individuais do throughput 
+	Hedera_value_list = []
+	ECMP_value_list = []
+	TCC_value_list = []
+
+	for i in xrange(args.duration+1):
+		Hedera_value_list.append ( throughput['random1']['accumulated_throughput']['Hedera'][i])
+		ECMP_value_list.append ( throughput['random1']['accumulated_throughput']['ECMP'][i])
+		TCC_value_list.append ( throughput['random1']['accumulated_throughput']['TCC'][i])
+			
+	
+
+	df = pd.DataFrame()
+
+	#atribui os valores das medicoes as colunas do dataframe
+	df['Hedera'] = np.array(Hedera_value_list)
+	df['ECMP'] = np.array(ECMP_value_list)
+	df['TCC'] = np.array(TCC_value_list)
+
+	#salva o dataframe em um arquivo csv
+	df.to_csv("teste.csv")
+	
+
+	for traffic in traffics:
+		Hedera_value_list = []
+		ECMP_value_list = []
+		TCC_value_list = []
+
+		for i in xrange(args.duration+1):
+			Hedera_value_list.append ( throughput[traffic]['accumulated_throughput']['Hedera'][i])
+			ECMP_value_list.append ( throughput[traffic]['accumulated_throughput']['ECMP'][i])
+			TCC_value_list.append ( throughput[traffic]['accumulated_throughput']['TCC'][i])
+			
+	
+
+		df = pd.DataFrame()
+
+		#atribui os valores das medicoes as colunas do dataframe
+		df['Hedera'] = np.array(Hedera_value_list)
+		df['ECMP'] = np.array(ECMP_value_list)
+		df['TCC'] = np.array(TCC_value_list)
+
+		#salva o dataframe em um arquivo csv
+		df.to_csv(traffic + "_accumulated_throughput.csv")
+
+			
+
+
+
+
+
+
+	#lista =  get_value_list_1(throughput, traffics, 'accumulated_throughput', 'Hedera')
+	#print lista 
+
+
+
+	#print Hedera_value_list
+
+
     #KS
 	#cria um dataframe do pandas
 	df = pd.DataFrame()
