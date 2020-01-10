@@ -181,22 +181,7 @@ def get_throughput(throughput, traffic, app, input_file):
 	throughput[traffic]['normalized_total_throughput'][app] = throughput[traffic]['accumulated_throughput'][app][args.duration] / (full_bisection_bw * args.duration)   # percentage
 
 
-	# arquivo1 = open("throughput_values.csv", mode='w')
-	# arquivo1.write(str(throughput[traffic]['normalized_total_throughput'][app]))
-	# arquivo1.close()
-
-	#pd.DataFrame(throughput['random2']['normalized_total_throughput']['TCC']).to_csv("throughput_values.csv",sep=',')
-	#pd.DataFrame(throughput['stag2_0.4_0.3']).to_csv("./results/k8/100/throughput_stag.csv",sep=',')
-	#pd.DataFrame(throughput).to_csv("./results/k8/100/throughput_values.csv",sep=',')
-	#pd.DataFrame(throughput).to_csv("./results/k8/100/throughput_values.csv",sep=',')
-	#print throughput["stag1_0.2_0.3"]
-	#for key in throughput.keys():
-    #		print "key: %s % (key)
-	#print throughput.keys()
-	#if "random1" in throughput.keys():
-	#	print throughput["random1"]["accumulated_throughput"]
-	#print "############################"
-	#return throughput
+	return throughput
 
 
 def get_value_list_1(value_dict, traffic, item, app):
@@ -326,6 +311,7 @@ def get_delay(delay, traffic, keys, app, input_file):
 				mean_deviation_list.append(float((line.split('/')[6]).split(' ')[0]))
 			else:
 				delay[traffic]['total_send'][app] += int(line.split(' ')[0])
+				#print delay[traffic]['total_send'][app]
 				delay[traffic]['total_receive'][app] += int(line.split(' ')[3])
 		delay[traffic][keys[0]][app] = calculate_average(average_delay_list)
 		delay[traffic][keys[1]][app] = calculate_average(mean_deviation_list)
@@ -421,7 +407,7 @@ def plot_results():
     
 #	print "$$$$$$$$$$$$$$$$$$"
 #	print average_delay.keys()
-#	pd.DataFrame(average_delay['random1']['']).to_csv("average_delay_random1.csv",sep=',')
+	#pd.DataFrame(throughput['random1']['']).to_csv("throughput_normalized_random1.csv",sep=',')
 #	print "$$$$$$$$$$$$$$$$$$"
 
 
@@ -447,6 +433,7 @@ def plot_results():
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/1.average_throughput.png')
 
+#KS
 	#print Hedera_value_list
 
 	#cria um dataframe do pandas
@@ -485,32 +472,15 @@ def plot_results():
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/2.normalized_total_throughput.png')
     
+	#print Hedera_value_list
+	#print "$$$$$$$$$$$$$$$$$$"
+	#print throughput[traffic]['accumulated_throughput']['Hedera']
+	#pd.DataFrame(average_delay['random1']['']).to_csv("average_round_trip_delay_random1.csv",sep=',')
+#	print "$$$$$$$$$$$$$$$$$$"
 
 
 	#Valores individuais do throughput 
-#	Hedera_value_list = []
-#	ECMP_value_list = []
-#	TCC_value_list = []
-
-#	for i in xrange(args.duration+1):
-#		Hedera_value_list.append ( throughput['random1']['accumulated_throughput']['Hedera'][i])
-#		ECMP_value_list.append ( throughput['random1']['accumulated_throughput']['ECMP'][i])
-#		TCC_value_list.append ( throughput['random1']['accumulated_throughput']['TCC'][i])
-			
 	
-
-#	df = pd.DataFrame()
-
-	#atribui os valores das medicoes as colunas do dataframe
-#	df['Hedera'] = np.array(Hedera_value_list)
-#	df['ECMP'] = np.array(ECMP_value_list)
-#	df['TCC'] = np.array(TCC_value_list)
-
-	#salva o dataframe em um arquivo csv
-#	df.to_csv("teste.csv")
-	
-#Valores individuais do throughput 
-
 	for traffic in traffics:
 		Hedera_value_list = []
 		ECMP_value_list = []
@@ -538,8 +508,12 @@ def plot_results():
 	#lista =  get_value_list_1(throughput, traffics, 'accumulated_throughput', 'Hedera')
 	#print lista 
 
+
+
 	#print Hedera_value_list
 
+
+    #KS
 	#cria um dataframe do pandas
 	df = pd.DataFrame()
 
@@ -574,30 +548,16 @@ def plot_results():
 	plt.tight_layout()
 	plt.savefig(args.out_dir + '/5.average_round_trip_delay.png')
 
-
-	#cria um dataframe do pandas
-	df = pd.DataFrame()
-
-	#atribui os valores das medicoes as colunas do dataframe
-	df['Hedera'] = np.array(Hedera_value_list)
-	df['ECMP'] = np.array(ECMP_value_list)
-	df['TCC'] = np.array(TCC_value_list)
-
-	#salva o dataframe em um arquivo csv
-	df.to_csv("./results/k8/100/average_round.csv")
-
-
-#Valores individuais do average_round
-
+	#Valores individuais do average round
 	# for traffic in traffics:
 	# 	Hedera_value_list = []
 	# 	ECMP_value_list = []
 	# 	TCC_value_list = []
 
 	# 	for i in xrange(args.duration+1):
-	# 		Hedera_value_list.append ( average_delay[traffic]['average_delay']['Hedera'][i])
-	# 		ECMP_value_list.append ( average_delay[traffic]['average_delay']['ECMP'][i])
-	# 		TCC_value_list.append ( average_delay[traffic]['average_delay']['TCC'][i])
+	# 		Hedera_value_list.append ( average_delay[traffic]['average_round_trip_delay']['Hedera'][i])
+	# 		ECMP_value_list.append ( average_delay[traffic]['average_round_trip_delay']['ECMP'][i])
+	# 		TCC_value_list.append ( average_delay[traffic]['average_round_trip_delay']['TCC'][i])
 			
 	
 
@@ -612,6 +572,31 @@ def plot_results():
 	# 	df.to_csv(traffic + "_average_round_trip_delay.csv")
 
 
+
+	#cria um dataframe do pandas
+	df = pd.DataFrame()
+
+	#atribui os valores das medicoes as colunas do dataframe
+	df['Hedera'] = np.array(Hedera_value_list)
+	df['ECMP'] = np.array(ECMP_value_list)
+	df['TCC'] = np.array(TCC_value_list)
+
+	#salva o dataframe em um arquivo csv
+	df.to_csv("./results/k8/100/average_round.csv")
+
+	print "$$$$$$$$$$$$$$$$$$"
+	#print average_delay[traffic][]
+	print average_delay_list
+	#pd.DataFrame(average_delay['random1']['']).to_csv("average_round_trip_delay_random1.csv",sep=',')
+#	print "$$$$$$$$$$$$$$$$$$"
+
+	
+	#lista =  get_value_list_1(average_delay, traffics, 'average_round_trip_delay', 'Hedera')
+	#print lista 
+
+	#print Hedera_value_list
+
+	
 
 
 
@@ -649,9 +634,10 @@ def plot_results():
 	#salva o dataframe em um arquivo csv
 	df.to_csv("./results/k8/100/packet_loss.csv")
 
-
-
-
+	#print "$$$$$$$$$$$$$$$$$$"
+	#print average_delay[traffic]
+	#pd.DataFrame(average_delay['random1']['']).to_csv("average_round_trip_delay_random1.csv",sep=',')
+#	print "$$$$$$$$$$$$$$$$$$"
 
 if __name__ == '__main__':
 	plot_results()
