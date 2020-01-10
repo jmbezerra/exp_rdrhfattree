@@ -102,7 +102,7 @@ class Fattree(Topo):
 				PREFIX = "h00"
 			self.HostList.append(self.addHost(PREFIX + str(i), cpu=args.cpu/float(NUMBER)))
 
-	def createLinks(self, bw_c2a=10, bw_a2e=10, bw_e2h=10):
+	def createLinks(self, bw_c2a=1000, bw_a2e=1000, bw_e2h=1000):
 		"""
 			Add network links.
 		"""
@@ -287,7 +287,7 @@ def monitor_devs_ng(fname="./txrate.txt", interval_sec=0.1):
 	cmd = "sleep 1; bwm-ng -t %s -o csv -u bits -T rate -C ',' > %s" %  (interval_sec * 1000, fname)
 	Popen(cmd, shell=True).wait()
 
-def traffic_generation(net, topo, flows_peers):
+def traffic_generation(net, topo, flows_peers, bw):
 	"""
 		Generate traffics and test the performance of the network.
 	"""
@@ -301,6 +301,8 @@ def traffic_generation(net, topo, flows_peers):
 		server.cmd("iperf -s > /dev/null &" )   # Its statistics is useless, just throw away.
 
 	time.sleep(3)
+
+	start = time.time()
 
 	# Start the clients.
 	for src, dest in flows_peers:
@@ -335,6 +337,8 @@ def traffic_generation(net, topo, flows_peers):
 			if client != server:
 				client.cmd("ping -c %d -i 0.1 -n -q %s >> %s/%s &" % (args.duration*10, server.IP(), args.output_dir, 'successive_packets.txt'))
 
+	end = time.time()
+
 	# 4. The experiment is going on.
 	time.sleep(args.duration + 5)
 
@@ -342,6 +346,12 @@ def traffic_generation(net, topo, flows_peers):
 	monitor.terminate()
 	os.system('killall bwm-ng')
 	os.system('killall iperf')
+ 
+	duration1 = end - start
+ 
+        file1 = open("ecmp_experiment_duration_k_{0}_bw_{1}.txt".format(str(args.k), str(bw)), mode='a')
+        file1.write(str(duration1)+'\n')
+        file1.close()
 
 def run_experiment(pod, density, ip="192.168.56.101", port=6653, bw_c2a=1000, bw_a2e=1000, bw_e2h=1000):
 	"""
@@ -372,7 +382,7 @@ def run_experiment(pod, density, ip="192.168.56.101", port=6653, bw_c2a=1000, bw
 	time.sleep(5)
 
 	# 2. Generate traffics and test the performance of the network.
-	traffic_generation(net, topo, iperf_peers.iperf_peers)
+	traffic_generation(net, topo, iperf_peers.iperf_peers, bw_a2e)
 
 	# CLI(net)
 	net.stop()
