@@ -39,9 +39,6 @@ The first parameter '4' means execute the experiment in a 'K=4' FatTree network;
 
 ### Author
 
-Brought to you by Huang MaChi (Chongqing University of Posts and Telecommunications, Chongqing, China).
+Part of this project was adapted from Huang MaChi (Chongqing University of Posts and Telecommunications, Chongqing, China).
 
-If you have any question, you can email me at huangmachi@foxmail.com.  Don't forget to STAR this repository!
-
-Enjoy it!
 # exp_rdrhfattree
