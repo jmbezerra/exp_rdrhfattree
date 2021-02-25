@@ -1,6 +1,6 @@
 ## RDRH_Fattree
 
-exp_RDRHFattree is an experiment to compare the performance of RDRH_Fattree with EFattree, ECMP, PureSDN and Hedera.
+exp_RDRHFattree is an experiment to compare the performance of RDRH_Fattree with ECMP and Hedera.
 
 
 ### Prerequisites
